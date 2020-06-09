@@ -1,0 +1,898 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/19/2020 3:29:08 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="servidorprd002"
+  DTS:CreatorName="servidorprd002\lucas.silva"
+  DTS:DTSID="{8EDA0CFA-1E2A-4593-A61B-183EA35A06D6}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.94"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="DataLake"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{27BF5B05-F224-4BDB-8DCA-29C877E7BC47}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ADLS Connection Manager]"
+      DTS:CreationName="AzureDataLake"
+      DTS:DTSID="{7847A425-0C60-44BD-839C-65FD79C76B81}"
+      DTS:ObjectName="ADLS Connection Manager">
+      <DTS:ObjectData>
+        <HadoopConnectionManager
+          ConnectionString="WebHdfsHost=teste;WebHdfsPort=443;WebHdfsUserName=;WebHdfsAuthType=AzureADUserIdentity;WebHdfsDomain=;WebHdfsIsHttps=True;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{044B7032-1427-43CD-947D-4B844840526C}"
+      DTS:ObjectName="LocalHost">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="{C434CF5A-BCBC-4030-9E58-8E906D96C00F}"
+      DTS:CreationName="Microsoft.LogProviderSQLServer"
+      DTS:Description="Grava entradas no log de eventos em um banco de dados SQL Server"
+      DTS:DTSID="{5D520B24-4F68-4D55-BDB5-C5F6C6DBA5B6}"
+      DTS:ObjectName="Provedor de log SSIS log para o SQL Server">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FBBB350C-FC79-4A32-8CE8-40D07633AF5C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Teste/Parcelas&quot;+&quot;_0&quot;+ &#xA;(DT_WSTR, 4)  DATEPART(&quot;DD&quot;,GetDate())+&#xA;&quot;-0&quot;+ (DT_WSTR, 4)  DATEPART(&quot;MM&quot;,GetDate())+&#xA;&quot;-&quot;+(DT_WSTR, 4)  DATEPART(&quot;YYYY&quot;,GetDate())&#xA;+&quot;_&quot;+(DT_WSTR, 4)  DATEPART(&quot;HH&quot;,GetDate())+&#xA;&quot; -&quot;+(DT_WSTR, 4)  DATEPART(&quot;MI&quot;,GetDate())+&quot;.csv&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="File_Pah">
+      <DTS:VariableValue
+        DTS:DataType="8">Teste/Parcelas_05-06-2020_9 -24.csv</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">1,7,OnError</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:SelectedLogProviders>
+      <DTS:SelectedLogProvider
+        DTS:InstanceID="{5D520B24-4F68-4D55-BDB5-C5F6C6DBA5B6}" />
+    </DTS:SelectedLogProviders>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Parcelas"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{3D744B94-EAFE-4E5F-B923-84D2E390181E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Parcelas"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="[Azure Data Lake Store Destination].[FilePath]">@[User::File_Pah]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Parcelas\Azure Data Lake Store Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              description="Loads data into Azure Data Lake Storage Gen1. To work with Azure Data Lake Storage Gen2, use Flexible File Destination with Azure Storage Connection Manager instead."
+              name="Azure Data Lake Store Destination"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of HDFS file"
+                  expressionType="Notify"
+                  name="FilePath">Teste/Parcelas_05-06-2020_9 -24.csv</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Column names in the first data row"
+                  expressionType="Notify"
+                  name="FirstRowAsColumnNames">true</property>
+                <property
+                  dataType="System.String"
+                  description="The character used to delimit columns in text file"
+                  expressionType="Notify"
+                  name="ColumnDelimiter">,</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Enable batch mode"
+                  expressionType="Notify"
+                  name="IsBatchMode">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Batch size"
+                  expressionType="Notify"
+                  name="BatchSize">10000</property>
+                <property
+                  dataType="System.Int32"
+                  description="File Format"
+                  expressionType="Notify"
+                  name="FileFormat">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">AdlsDest</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Parcelas\Azure Data Lake Store Destination.Connections[Azure Data Lake Connection Manager]"
+                  connectionManagerID="Package.ConnectionManagers[ADLS Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[ADLS Connection Manager]"
+                  name="Azure Data Lake Connection Manager" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input]"
+                  hasSideEffects="true"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="36"
+                      cachedName="ID"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[ID]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ID]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[Data]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Data"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[Data]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Data]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[Tipo_par]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Tipo_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[Tipo_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Tipo_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[Descricao_par]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="Descricao_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[Descricao_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Descricao_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[AtInat_par]"
+                      cachedDataType="i4"
+                      cachedName="AtInat_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[AtInat_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[AtInat_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[DataCad_par]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DataCad_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[DataCad_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DataCad_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[TipoPara_par]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="TipoPara_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[TipoPara_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[TipoPara_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[UsrCad_par]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="UsrCad_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[UsrCad_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[UsrCad_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[CategParc_par]"
+                      cachedDataType="i4"
+                      cachedName="CategParc_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[CategParc_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[CategParc_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[ForaIRPF_par]"
+                      cachedDataType="bool"
+                      cachedName="ForaIRPF_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[ForaIRPF_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ForaIRPF_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[DesconsiderarNoDescQuitacao_par]"
+                      cachedDataType="bool"
+                      cachedName="DesconsiderarNoDescQuitacao_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[DesconsiderarNoDescQuitacao_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DesconsiderarNoDescQuitacao_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[DesconsiderarNoEnvioPorEmail_par]"
+                      cachedDataType="bool"
+                      cachedName="DesconsiderarNoEnvioPorEmail_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[DesconsiderarNoEnvioPorEmail_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DesconsiderarNoEnvioPorEmail_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[DesconsiderarNoRateioCobranca_par]"
+                      cachedDataType="bool"
+                      cachedName="DesconsiderarNoRateioCobranca_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[DesconsiderarNoRateioCobranca_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DesconsiderarNoRateioCobranca_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[CategMovFin_par]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="CategMovFin_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[CategMovFin_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[CategMovFin_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[Financiamento_par]"
+                      cachedDataType="bool"
+                      cachedName="Financiamento_par"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[Financiamento_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Financiamento_par]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[Id_Uau]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Id_Uau"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[Id_Uau]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Id_Uau]" />
+                    <inputColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].Columns[GestorId]"
+                      cachedDataType="i4"
+                      cachedName="GestorId"
+                      externalMetadataColumnId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[GestorId]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[GestorId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="36"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[Data]"
+                      dataType="dbTimeStamp"
+                      name="Data" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[Tipo_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Tipo_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[Descricao_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Descricao_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[AtInat_par]"
+                      dataType="i4"
+                      name="AtInat_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[DataCad_par]"
+                      dataType="dbTimeStamp"
+                      name="DataCad_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[TipoPara_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="TipoPara_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[UsrCad_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="UsrCad_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[CategParc_par]"
+                      dataType="i4"
+                      name="CategParc_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[ForaIRPF_par]"
+                      dataType="bool"
+                      name="ForaIRPF_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[DesconsiderarNoDescQuitacao_par]"
+                      dataType="bool"
+                      name="DesconsiderarNoDescQuitacao_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[DesconsiderarNoEnvioPorEmail_par]"
+                      dataType="bool"
+                      name="DesconsiderarNoEnvioPorEmail_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[DesconsiderarNoRateioCobranca_par]"
+                      dataType="bool"
+                      name="DesconsiderarNoRateioCobranca_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[CategMovFin_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="CategMovFin_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[Financiamento_par]"
+                      dataType="bool"
+                      name="Financiamento_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[Id_Uau]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Id_Uau" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input].ExternalColumns[GestorId]"
+                      dataType="i4"
+                      name="GestorId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Parcelas\Origem OLE DB"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origem OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;7"
+              description="Origem OLE DB"
+              name="Origem OLE DB"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Os mapeamentos entre os parâmetros no comando SQL e as variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Parcelas\Origem OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB]"
+                  name="Saída de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ID]"
+                      length="36"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ID]"
+                      name="ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Data]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[Data]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Data]"
+                      name="Data"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Tipo_par]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[Tipo_par]"
+                      length="3"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Tipo_par]"
+                      name="Tipo_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Descricao_par]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[Descricao_par]"
+                      length="15"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Descricao_par]"
+                      name="Descricao_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[AtInat_par]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[AtInat_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[AtInat_par]"
+                      name="AtInat_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DataCad_par]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[DataCad_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DataCad_par]"
+                      name="DataCad_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[TipoPara_par]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[TipoPara_par]"
+                      length="3"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[TipoPara_par]"
+                      name="TipoPara_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[UsrCad_par]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[UsrCad_par]"
+                      length="8"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[UsrCad_par]"
+                      name="UsrCad_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[CategParc_par]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[CategParc_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[CategParc_par]"
+                      name="CategParc_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ForaIRPF_par]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ForaIRPF_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[ForaIRPF_par]"
+                      name="ForaIRPF_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DesconsiderarNoDescQuitacao_par]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[DesconsiderarNoDescQuitacao_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DesconsiderarNoDescQuitacao_par]"
+                      name="DesconsiderarNoDescQuitacao_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DesconsiderarNoEnvioPorEmail_par]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[DesconsiderarNoEnvioPorEmail_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DesconsiderarNoEnvioPorEmail_par]"
+                      name="DesconsiderarNoEnvioPorEmail_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DesconsiderarNoRateioCobranca_par]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[DesconsiderarNoRateioCobranca_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[DesconsiderarNoRateioCobranca_par]"
+                      name="DesconsiderarNoRateioCobranca_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[CategMovFin_par]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[CategMovFin_par]"
+                      length="5"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[CategMovFin_par]"
+                      name="CategMovFin_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Financiamento_par]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[Financiamento_par]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Financiamento_par]"
+                      name="Financiamento_par"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Id_Uau]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[Id_Uau]"
+                      length="50"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[Id_Uau]"
+                      name="Id_Uau"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[GestorId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[GestorId]"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[GestorId]"
+                      name="GestorId"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="36"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[Data]"
+                      dataType="dbTimeStamp"
+                      name="Data" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[Tipo_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Tipo_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[Descricao_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Descricao_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[AtInat_par]"
+                      dataType="i4"
+                      name="AtInat_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[DataCad_par]"
+                      dataType="dbTimeStamp"
+                      name="DataCad_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[TipoPara_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="TipoPara_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[UsrCad_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="UsrCad_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[CategParc_par]"
+                      dataType="i4"
+                      name="CategParc_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[ForaIRPF_par]"
+                      dataType="bool"
+                      name="ForaIRPF_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[DesconsiderarNoDescQuitacao_par]"
+                      dataType="bool"
+                      name="DesconsiderarNoDescQuitacao_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[DesconsiderarNoEnvioPorEmail_par]"
+                      dataType="bool"
+                      name="DesconsiderarNoEnvioPorEmail_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[DesconsiderarNoRateioCobranca_par]"
+                      dataType="bool"
+                      name="DesconsiderarNoRateioCobranca_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[CategMovFin_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="CategMovFin_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[Financiamento_par]"
+                      dataType="bool"
+                      name="Financiamento_par" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[Id_Uau]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Id_Uau" />
+                    <externalMetadataColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[GestorId]"
+                      dataType="i4"
+                      name="GestorId" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="36"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ID]"
+                      name="ID" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[Data]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[Data]"
+                      name="Data" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[Tipo_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[Tipo_par]"
+                      name="Tipo_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[Descricao_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[Descricao_par]"
+                      name="Descricao_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[AtInat_par]"
+                      dataType="i4"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[AtInat_par]"
+                      name="AtInat_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[DataCad_par]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[DataCad_par]"
+                      name="DataCad_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[TipoPara_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[TipoPara_par]"
+                      name="TipoPara_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[UsrCad_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[UsrCad_par]"
+                      name="UsrCad_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[CategParc_par]"
+                      dataType="i4"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[CategParc_par]"
+                      name="CategParc_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ForaIRPF_par]"
+                      dataType="bool"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ForaIRPF_par]"
+                      name="ForaIRPF_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[DesconsiderarNoDescQuitacao_par]"
+                      dataType="bool"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[DesconsiderarNoDescQuitacao_par]"
+                      name="DesconsiderarNoDescQuitacao_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[DesconsiderarNoEnvioPorEmail_par]"
+                      dataType="bool"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[DesconsiderarNoEnvioPorEmail_par]"
+                      name="DesconsiderarNoEnvioPorEmail_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[DesconsiderarNoRateioCobranca_par]"
+                      dataType="bool"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[DesconsiderarNoRateioCobranca_par]"
+                      name="DesconsiderarNoRateioCobranca_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[CategMovFin_par]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[CategMovFin_par]"
+                      name="CategMovFin_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[Financiamento_par]"
+                      dataType="bool"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[Financiamento_par]"
+                      name="Financiamento_par" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[Id_Uau]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[Id_Uau]"
+                      name="Id_Uau" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[GestorId]"
+                      dataType="i4"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[GestorId]"
+                      name="GestorId" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Parcelas.Paths[Saída de Origem OLE DB]"
+              endId="Package\Parcelas\Azure Data Lake Store Destination.Inputs[Input]"
+              name="Saída de Origem OLE DB"
+              startId="Package\Parcelas\Origem OLE DB.Outputs[Saída de Origem OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Parcelas"
+          TopLeft="173,77" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Parcelas">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Parcelas\Origem OLE DB"
+          TopLeft="67,87" />
+        <NodeLayout
+          Size="248,42"
+          Id="Package\Parcelas\Azure Data Lake Store Destination"
+          TopLeft="28,205" />
+        <EdgeLayout
+          Id="Package\Parcelas.Paths[Saída de Origem OLE DB]"
+          TopLeft="149,129">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,76"
+              Start="0,0"
+              End="0,68.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Parcelas\Origem OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Parcelas\Azure Data Lake Store Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
