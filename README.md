@@ -2,11 +2,18 @@
 Criar planilhas Historicas no Azure Datalake 
 ultilizando Integration Services 
 
-# 1 - Instalação do Pack: <br> 
+# A - Instalação do Pack: <br> 
 https://docs.microsoft.com/pt-br/sql/integration-services/azure-feature-pack-for-integration-services-ssis?view=sql-server-ver15
 
-# 2 - Criar um Pacote do  Integration Services  e adicione uma Tarefa de Fluxo de Dados
+# B - Criar um Pacote do  Integration Services  
+1 - Adicione uma Tarefa de Fluxo de Dados
+2 - Abra a Tarefa de Fluxo de Dados para ir ao DataFlow
 
-![alt text](https://raw.githubusercontent.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/master/Pictures/1.png?token=APDBGF4X4CRCK6NQM4PFHZC65N4H6) 
+![alt text](https://raw.githubusercontent.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/master/Pictures/1.png?token=APDBGFZJY2JPCNRNBL3MAVS65ODKE) 
 
-# 3 -  Adicione o componente Origem OLE DB e faça  as conexão 
+# C -  Conexões 
+3 - Adicione uma conexão Origem OLE DB 
+4 - Abra a conexão 
+5 - Clique em New para busca uma Conexão com o Banco
+6 - Clique em New Novamente para criar a Conexão 
+![alt text](https://raw.githubusercontent.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/master/Pictures/2.png?token=APDBGFZULXIKPCMRG736TK265ODRU) 
