@@ -7,6 +7,6 @@ https://docs.microsoft.com/pt-br/sql/integration-services/azure-feature-pack-for
 
 # 2 - Criar um Pacote do  Integration Services  e adicione uma Tarefa de Fluxo de Dados
 
-![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/1.PNG) 
+![alt text](https://raw.githubusercontent.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/master/Pictures/1.png?token=APDBGF4X4CRCK6NQM4PFHZC65N4H6) 
 
 # 3 -  Adicione o componente Origem OLE DB e faça  as conexão 
