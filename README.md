@@ -9,11 +9,11 @@ https://docs.microsoft.com/pt-br/sql/integration-services/azure-feature-pack-for
 1 - Adicione uma Tarefa de Fluxo de Dados
 2 - Abra a Tarefa de Fluxo de Dados para ir ao DataFlow
 
-![alt text](https://raw.githubusercontent.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/master/Pictures/1.png?token=APDBGFZJY2JPCNRNBL3MAVS65ODKE) 
+![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/1.png) 
 
 # C -  Conexões 
-3 - Adicione uma conexão Origem OLE DB 
-4 - Abra a conexão 
-5 - Clique em New para busca uma Conexão com o Banco
-6 - Clique em New Novamente para criar a Conexão 
-![alt text](https://raw.githubusercontent.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/master/Pictures/2.png?token=APDBGFZULXIKPCMRG736TK265ODRU) 
+3 - Adicione uma conexão Origem OLE DB  <br />
+4 - Abra a conexão  <br />
+5 - Clique em New para busca uma nova conexão  <br />
+6 - Clique em New Novamente para criar a Conexão   <br />
+![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/2.png) 
