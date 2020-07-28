@@ -84,14 +84,27 @@ e de o OK
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/10.png) 
 
  <br />
- # 12 - Datalake Config <br />
+ #12 - Datalake Config <br />
  29 - Clique em DataFlow <br />
  30 -  Abra o **Azure Data Lake Store Destination** , Veja que em **File Path** já vai está preenchido <br />
- 31 - Vá em **Mappings**  <br />
+
  
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/11.png) <br />
 
+31 - Vá em **Mappings**  para Mapear as colunas  <br />
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/12.png)  <br />
+
+
+# 14 - Excutando o pacote  
+32 - Execute o Pacote  <br />
+![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/13.png)  <br />
+
+Veja que no Data Lake foi criado  a Pasta **Teste** e dentro dela o Arquivo de chamado **Parcelas_04_06_2020_19-21.csv**
+![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/14.png)  <br />
+Toda vez que rodar o pacote irá criar um novo arquivo com a data,hora e segundos,  dentro na mesma pasta 
+![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/15.png)  <br />
+
+
 
 
 
