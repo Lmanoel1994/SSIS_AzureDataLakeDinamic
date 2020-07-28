@@ -26,7 +26,7 @@ https://docs.microsoft.com/pt-br/sql/integration-services/azure-feature-pack-for
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/3.png) 
 
 # 5 - Tabela
-11 - Selecione a sua tabelas 
+11 - Selecione a sua tabelas  <br />
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/4.png) 
 
 # 6 - Azure Data Lake
@@ -57,15 +57,24 @@ https://docs.microsoft.com/pt-br/sql/integration-services/azure-feature-pack-for
 " -"+(DT_WSTR, 4)  DATEPART("MI",GetDate())+"**.csv"** <br />
 
 **O codigo é para definimos o caminho  do DataLake e o tipo de arquivo que iremos salvar com a data hora e minutos** <br />
-O codigo está basicamente esta criando uma pasta no meu Dataleke chamada **Teste** e dentro da pasta esta criando um arquivo com a data e Hora do computador  deixando o nome como  **Parcelas_04-06-2020_19-16.csv** <br />
+ O codigo está basicamente esta criando uma pasta no meu Dataleke chamada **Teste** e dentro da pasta esta criando um arquivo com a data e Hora do computador  deixando o nome como  **Parcelas_04-06-2020_19-16.csv** <br />
 **se quiser mudar o nome do diretorio ou do arquivo basta alterar o nome de Teste e Parcela do codigo** <br />
 
 **Depois clique em Evaluate Expression para ver o resultado**
 No meu caso ficou **Teste/Parcelas_04-06-2020_19-16.csv**
 Então no Meu Dataleke tera uma pasta chamada **Teste** e dentro da pasta tera o arquivo chamado **Parcelas_04-06-2020_19-16.csv**
 e de o OK
+ <br />
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/8.png) 
 
 # 10 - Control Flow  
+22 - Volte para o Control Flow, clique com o botão direito no componente **Tarefa Fluxo de Dados**
+ <br />
+23 - Clique em **Propriedades**
+<br />
+![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/9.png) 
+
+<br />
+
 
 
