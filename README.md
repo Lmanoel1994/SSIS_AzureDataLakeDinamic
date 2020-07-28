@@ -29,7 +29,7 @@ https://docs.microsoft.com/pt-br/sql/integration-services/azure-feature-pack-for
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/3.png) 
 
 # 5 - Tabela
-11 - Selecione a sua **tabelas**  <br />
+11 - Selecione a sua **tabela**  <br />
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/4.png) 
 
 # 6 - Azure Data Lake
