@@ -45,9 +45,9 @@ https://docs.microsoft.com/pt-br/sql/integration-services/azure-feature-pack-for
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/6.png) 
 
 # 8 - Variaveis 
-18 - Clique no icone onde está sinalizado na imagem  <br />
-19 - Clique no icone onde está sinalizado na imagem para poder criar a variavel escolha um nome e tipo  String sem valor  <br />
-20 - Clique nos [...] para abrir  o Expression Builder  <br />
+18 - Clique no icone de **variavel** (onde está sinalizado na imagem)   <br />
+19 - Clique no icone de **criação de variavel** para poder criar a variavel escolha um **nome** e **tipo** (String sem valor) (onde está sinalizado na imagem)   <br />
+20 - Clique nos **[...]** para abrir  o **Expression Builder**  <br />
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/7.png) 
 
 # 9 - Caminho do DataLake 
@@ -59,19 +59,20 @@ https://docs.microsoft.com/pt-br/sql/integration-services/azure-feature-pack-for
 +"_"+(DT_WSTR, 4)  DATEPART("HH",GetDate())+ <br />
 " -"+(DT_WSTR, 4)  DATEPART("MI",GetDate())+"**.csv"** <br />
 
-**O codigo é para definimos o caminho  do DataLake e o tipo de arquivo que iremos salvar com a data hora e minutos** <br />
- O codigo está basicamente esta criando uma pasta no meu Dataleke chamada **Teste** e dentro da pasta esta criando um arquivo com a data e Hora do computador  deixando o nome como  **Parcelas_04-06-2020_19-16.csv** <br />
-**se quiser mudar o nome do diretorio ou do arquivo basta alterar o nome de Teste e Parcela do codigo** <br />
+**O codigo é para definimos o caminho  do Data Lake e o tipo de arquivo que iremos salvar com a data/hora e minutos** <br />
+ O codigo está basicamente criando uma pasta no meu **Data Lake** chamada de **Teste** e dentro da pasta esta criando um arquivo com a data e Hora do computador  deixando o nome como  **Parcelas_04-06-2020_19-16.csv** <br />
+
+**OBS/; se quiser mudar o nome do diretorio ou do arquivo basta alterar o nome de 'Teste' e 'Parcela' do codigo** <br />
 
 **Depois clique em Evaluate Expression para ver o resultado**
 No meu caso ficou **Teste/Parcelas_04-06-2020_19-16.csv**
-Então no Meu Dataleke tera uma pasta chamada **Teste** e dentro da pasta tera o arquivo chamado **Parcelas_04-06-2020_19-16.csv**
+Então no Meu **Data lake** tera uma pasta chamada **Teste** e dentro da pasta tera o arquivo chamado **Parcelas_04-06-2020_19-16.csv**
 e de o OK
  <br />
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/8.png) 
 
 # 10 - Control Flow  
-22 - Volte para o Control Flow, clique com o botão direito no componente **Tarefa Fluxo de Dados**
+22 - Volte para o **Control Flow**, clique com o botão direito no componente **Tarefa Fluxo de Dados**
  <br />
 23 - Clique em **Propriedades**
 <br />
@@ -80,15 +81,15 @@ e de o OK
 
 # 11 - Expression Builder  
 24 - Nas propriedades clique nos  **[...]** <br />
-25 - Irá aparecer uma janela de  propriedade de expresões, em Propety selecione a **[Azure Data Lake Store Destination].[FilePath]** <br />
-26 - Em Expressions clique **[...]**  <br />
+25 - Irá aparecer uma janela de  propriedade de expresões, em **Propety** selecione a **[Azure Data Lake Store Destination].[FilePath]** <br />
+26 - Em **Expressions** clique **[...]**  <br />
 27 - Irá aparecer uma janela de **Expression Builder**, Selecione a Variavel que foi criada **(File_Path)** <br />
 28 -  Arraste a variavel para **Expression**  e clique em **Evaluate Expression** e cliquem OK <br />
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/10.png) 
 
  <br />
- #12 - Datalake Config <br />
- 29 - Clique em DataFlow <br />
+ #12 -Data lake Config <br />
+ 29 - Clique em **DataFlow** <br />
  30 -  Abra o **Azure Data Lake Store Destination** , Veja que em **File Path** já vai está preenchido <br />
 
  
