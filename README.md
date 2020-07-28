@@ -84,7 +84,12 @@ e de o OK
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/10.png) 
 
  <br />
+ # 12 - Datalake Config
+ 29 - Clique em DataFlow 
+ 30 -  Abra o **Azure Data Lake Store Destination** , Veja que em **File Path** já vai está preenchido 
+ 31 - Vá em **Mappings** 
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/11.png) 
+![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/12.png) 
 
 
 
