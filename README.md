@@ -76,10 +76,11 @@ e de o OK
 <br />
 
 # 11 - Expression Builder  
-24 - Nas propriedades clique nos  **[...]** 
-25 - Irá aparecer uma janela de  propriedade de expresões  selecione a **[Azure Data Lake Store Destination].[FilePath]**
-26 - Clique **[...]**  
-27 - Irá aparecer uma janela de **Expression Builder**, Selecione a Variavel que foi criada **(File_Path)**
+24 - Nas propriedades clique nos  **[...]** <br />
+25 - Irá aparecer uma janela de  propriedade de expresões, em Propety selecione a **[Azure Data Lake Store Destination].[FilePath] **<br />
+26 - Em Expressions clique **[...]**  <br />
+27 - Irá aparecer uma janela de **Expression Builder**, Selecione a Variavel que foi criada **(File_Path)** <br />
+28 -  Arraste a variavel para **Expression**  e clique em **Evaluate Expression** <br />
 
 ![alt text](https://github.com/Lmanoel1994/SSIS_AzureDataLakeDinamic/blob/master/Pictures/10.png) 
 
